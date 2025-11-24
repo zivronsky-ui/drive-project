@@ -1,11 +1,12 @@
 // const express = require("express");
 var express = require("express");
 var router = express.Router();
-const fs = require("fs");
-const path = require("path");
+var fs = require("fs");
+var path = require("path");
 /* GET users listing. */
 router.get("/:user", async function (req, res, next) {
   try {
+    console.log("path: ", path.join(__dirname, "../users", req.params.user));
     const files = await fs.promises.readdir(
       path.join(__dirname, "../users", req.params.user)
     );
