@@ -52,7 +52,7 @@ function LoginForm() {
             onChange={handleUsername}
             required
           />
-
+          <br />
           <input
             type="password"
             placeholder="Password"
@@ -60,6 +60,7 @@ function LoginForm() {
             onChange={handlePassword}
             required
           />
+          <br />
 
           <button type="submit">log in</button>
 

@@ -3,7 +3,7 @@ import AddFile from "./AddFile";
 import Folder from "./Folder";
 import File from "./File";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 
 /**hello */
 function User() {
@@ -35,8 +35,6 @@ function User() {
 
       {data.map((file) => {
         return file.type === "file" ? (
-          // <Link url="">
-          // {" "}
           <File
             filename={file.filename}
             data={data}
@@ -44,7 +42,6 @@ function User() {
             username={username}
           />
         ) : (
-          // </Link>
           <Folder foldername={file.filename} data={data} setData={setData} />
         );
       })}
