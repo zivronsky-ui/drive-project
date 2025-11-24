@@ -23,32 +23,6 @@ router.get("/:user", async function (req, res, next) {
         //   });
         // });
 
-        router.get("/:user/:fileName/read", (req, res) => {
-          const user = req.params.user;
-          const fileName = req.params.fileName;
-          fs.readdir(
-            path.join(__dirname, `../users/${user}/${fileName}`),
-            "utf8",
-            (err, data) => {
-              if (err) {
-                console.error("Error reading file:", err);
-                return;
-              }
-              res.send(data);
-            }
-          );
-        });
-
-        router.get("/:user/:folderName/readFolder", (req, res) => {
-          fs.readFile("/", "utf8", (err, data) => {
-            if (err) {
-              console.error("Error reading file:", err);
-              return;
-            }
-            res.send(data);
-          });
-        });
-
         arr.push({ filename: file, type: "folder" });
       } else {
         arr.push({ filename: file, type: "file" });
@@ -59,6 +33,35 @@ router.get("/:user", async function (req, res, next) {
     console.error("Error reading directory:", err);
     res.status(500).send({ error: "Failed to read directory" });
   }
+});
+router.get("/:user/:fileName/read", (req, res) => {
+  fs.readFile(
+    path.join(__dirname, "../users", req.params.user, req.params.fileName),
+    "utf8",
+    (err, data) => {
+      if (err) {
+        console.error("Error reading file:", err);
+        res.send("error oopsy");
+      }
+      console.log("read YAYYYY ", data);
+      res.send(data);
+    }
+  );
+});
+router.get("/:user/:folderName/readFolder", (req, res) => {
+  const user = req.params.user;
+  const fileName = req.params.fileName;
+  fs.readdir(
+    path.join(__dirname, `../users/${user}/${fileName}`),
+    "utf8",
+    (err, data) => {
+      if (err) {
+        console.error("Error reading file:", err);
+        return;
+      }
+      res.send(data);
+    }
+  );
 });
 router.post("/file/new", (req, res) => {
   const { userName, fileName } = req.body;
