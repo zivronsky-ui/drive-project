@@ -3,10 +3,16 @@ import AddFile from "./AddFile";
 import Folder from "./Folder";
 import File from "./File";
 import { useState } from "react";
+import { useNavigate } from "react-router";
+
 /**hello */
 function User() {
+  let navigate = useNavigate();
   const [data, setData] = useState([]);
-  let username = "ziv";
+  let username = JSON.parse(localStorage.getItem("currentUser"));
+  if (username === null) {
+    navigate(`/login`);
+  }
   useEffect(() => {
     console.log("enter");
     fetch(`http://localhost:3000/myDrive/${username}`, { method: "GET" })

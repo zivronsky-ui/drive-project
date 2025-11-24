@@ -1,13 +1,13 @@
 [
   {
     "id": 1,
-    "name": "john_doe",
-    "password": "John1234!"
+    "name": "ziv",
+    "password": "111"
   },
   {
     "id": 2,
-    "name": "emma_smith",
-    "password": "EmmaPass99"
+    "name": "efrat",
+    "password": "222"
   },
   {
     "id": 3,
