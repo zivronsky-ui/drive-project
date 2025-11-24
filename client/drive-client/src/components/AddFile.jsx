@@ -22,6 +22,7 @@ function AddFile({ url, setData, data }) {
       }),
     });
     setData([...data, { filename: fileName, type: "file" }]);
+    setFileName("");
   }
   return (
     <>

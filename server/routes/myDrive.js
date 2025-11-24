@@ -4,7 +4,6 @@ var router = express.Router();
 const fs = require("fs");
 const path = require("path");
 /* GET users listing. */
-
 router.get("/:user", async function (req, res, next) {
   try {
     const files = await fs.promises.readdir(
@@ -53,9 +52,12 @@ router.post("/folder/new", (req, res) => {
   res.send(newDir);
 });
 
-router.delete("/file/delete", (req, res) => {
+router.delete("/:user/file/:fileName/delete", (req, res) => {
   try {
-    fs.deleteFile(path.join(__dirname, "../users", userName, fileName), "");
+    fs.unlinkSync(
+      path.join(__dirname, "../users", req.params.user, req.params.fileName),
+      ""
+    );
     res.send("file deleted");
   } catch (err) {
     res.status(500).send({
@@ -76,8 +78,8 @@ router.put("/file/rename", (req, res) => {
           error: "error renaming ",
           details: err.message,
         });
-        res.send("renaming succesed");
       }
+      res.send("renaming succesed");
     }
   );
 });

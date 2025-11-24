@@ -8,6 +8,7 @@ function User() {
   const [data, setData] = useState([]);
   let username = "ziv";
   useEffect(() => {
+    console.log("enter");
     fetch(`http://localhost:3000/myDrive/${username}`, { method: "GET" })
       .then((response) => response.json())
       .then((data) => {
@@ -20,9 +21,14 @@ function User() {
 
       {data.map((file) => {
         return file.type === "file" ? (
-          <File filename={file.filename} />
+          <File
+            filename={file.filename}
+            data={data}
+            setData={setData}
+            username={username}
+          />
         ) : (
-          <Folder foldername={file.filename} />
+          <Folder foldername={file.filename} data={data} setData={setData} />
         );
       })}
     </>
