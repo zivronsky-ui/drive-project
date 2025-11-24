@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function AddFile({ url }) {
+function AddFile({ url, setData, data }) {
   const [fileName, setFileName] = useState("");
   const userName = "ziv";
 
@@ -21,6 +21,7 @@ function AddFile({ url }) {
         userName: userName,
       }),
     });
+    setData([...data, { filename: fileName, type: "file" }]);
   }
   return (
     <>
