@@ -31,7 +31,12 @@ function User() {
         />
         <h1>MyDrive</h1>
       </div>
-      <AddFile url="/myDrive/file/new" data={data} setData={setData} />
+      <AddFile
+        url="/myDrive/file/new"
+        data={data}
+        setData={setData}
+        username={username}
+      />
 
       {data.map((file) => {
         return file.type === "file" ? (

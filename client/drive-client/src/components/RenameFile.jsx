@@ -2,8 +2,7 @@ import { useState } from "react";
 // import User from "./components/User";
 import "../App.css";
 
-function RenameFile({ filename, data, setData }) {
-  const userName = "ziv";
+function RenameFile({ filename, data, setData, username }) {
   const [showInput, setShowInput] = useState(false);
   const [value, setValue] = useState("");
   function renameFile() {
@@ -14,13 +13,14 @@ function RenameFile({ filename, data, setData }) {
       body: JSON.stringify({
         fileName: filename,
         newFileName: value,
+        username: username,
       }),
       headers: {
         "Content-Type": "application/json",
       },
     }).then((response) => {
       if (response.ok) {
-        fetch(`http://localhost:3000/myDrive/${userName}`, { method: "GET" })
+        fetch(`http://localhost:3000/myDrive/${username}`, { method: "GET" })
           .then((response) => response.json())
           .then((data) => {
             setData(data);

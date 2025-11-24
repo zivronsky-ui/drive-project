@@ -4,6 +4,7 @@ var router = express.Router();
 var fs = require("fs");
 var path = require("path");
 /* GET users listing. */
+
 router.get("/:user", async function (req, res, next) {
   try {
     console.log("path: ", path.join(__dirname, "../users", req.params.user));
@@ -96,15 +97,14 @@ router.delete("/:user/file/:fileName/delete", (req, res) => {
 });
 
 router.put("/file/rename", (req, res) => {
-  const userName = "ziv";
   // const fileName = req.params.fileName;
-  const { fileName, newFileName } = req.body;
+  const { fileName, newFileName, username } = req.body;
   console.log("fileName: ", fileName);
   console.log("newFileName: ", newFileName);
   // const newFileName = req.body.newFileName;
   const newName = fs.rename(
-    path.join(__dirname, "../users", userName, `${fileName}`),
-    path.join(__dirname, "../users", userName, `${newFileName}`),
+    path.join(__dirname, "../users", username, `${fileName}`),
+    path.join(__dirname, "../users", username, `${newFileName}`),
     (err) => {
       if (err) {
         res.status(500).send({

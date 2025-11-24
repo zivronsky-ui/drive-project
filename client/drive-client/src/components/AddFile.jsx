@@ -1,15 +1,14 @@
 import { useState } from "react";
 
-function AddFile({ url, setData, data }) {
+function AddFile({ url, setData, data, username }) {
   const [fileName, setFileName] = useState("");
-  const userName = "ziv";
 
   function handleChange(e) {
     setFileName(e.target.value);
   }
   function addFile() {
     console.log("fn", fileName);
-    console.log(userName);
+    console.log(username);
     fetch("http://localhost:3000" + url, {
       method: "POST",
       headers: {
@@ -18,7 +17,7 @@ function AddFile({ url, setData, data }) {
       },
       body: JSON.stringify({
         fileName: fileName,
-        userName: userName,
+        userName: username,
       }),
     });
     setData([...data, { filename: fileName, type: "file" }]);

@@ -13,7 +13,12 @@ function File({ filename, data, setData, username }) {
             setData={setData}
             username={username}
           />
-          <RenameFile data={data} setData={setData} filename={filename} />
+          <RenameFile
+            data={data}
+            setData={setData}
+            filename={filename}
+            username={username}
+          />
         </div>
       </div>
 
