@@ -1,3 +1,11 @@
+/* General page / App.css - Google Drive inspired style */
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f1f3f4;
+  margin: 0;
+  padding: 0;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,38 +13,181 @@
   text-align: center;
 }
 
+/* Page header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  color: #202124;
+  font-weight: 500;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Add File container */
+.add-file-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
 }
 
-.card {
-  padding: 2em;
+.add-file-container input {
+  width: 200px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #dadce0;
+  outline: none;
+  font-size: 14px;
+  margin-right: 8px;
 }
 
-.read-the-docs {
-  color: #888;
+.add-file-container input:focus {
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+.add-file-container button {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.add-file-container button:hover {
+  background-color: #357ae8;
+}
+
+/* File / Folder card */
+.file-container,
+.folder-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  margin: 10px auto;
+  padding: 12px 16px;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.15), 0 1px 2px rgba(60, 64, 67, 0.1);
+  transition: box-shadow 0.2s, transform 0.1s;
+}
+
+.file-container:hover,
+.folder-container:hover {
+  box-shadow: 0 4px 6px rgba(60, 64, 67, 0.2), 0 2px 4px rgba(60, 64, 67, 0.15);
+  transform: translateY(-2px);
+}
+
+/* File / Folder name */
+.file-container div:first-child,
+.folder-container div:first-child {
+  font-size: 16px;
+  color: #202124;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* Buttons inside each file/folder card */
+.file-container button,
+.folder-container button {
+  background-color: transparent;
+  border: none;
+  color: #5f6368;
+  cursor: pointer;
+  margin-left: 6px;
+  font-size: 14px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.file-container button:hover,
+.folder-container button:hover {
+  background-color: #e8f0fe;
+  color: #1967d2;
+}
+
+/* Rename Container - FIXED TO PREVENT WRAPPING */
+.rename-container {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* space between input and buttons */
+  flex-wrap: nowrap; /* FIX: Prevents elements from wrapping onto a new line */
+  /* Make sure this container has adequate space inside the file/folder card */
+}
+
+.rename-container input {
+  padding: 4px 6px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #dadce0;
+  flex: 1 1 auto; /* input can grow and shrink */
+  min-width: 80px; /* minimum width so it doesn't get too small */
+  word-break: break-word; /* wrap long words */
+}
+
+.rename-container button {
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  background-color: #4285f4;
+  color: white;
+  flex-shrink: 0; /* buttons won’t shrink */
+  transition: background-color 0.2s;
+}
+
+.rename-container button:hover {
+  background-color: #357ae8;
+}
+
+/* General Input Styles for rename in file card (Keep separate for specificity) */
+.file-container input,
+.folder-container input {
+  padding: 6px 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #dadce0;
+  margin-right: 6px;
+}
+
+.file-container input:focus,
+.folder-container input:focus {
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+  outline: none;
+}
+/* Rename Container - FIXED TO PREVENT WRAPPING */
+.rename-container {
+  display: flex; /* Makes the children (input and buttons) align horizontally */
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap; /* 🔥 THIS PREVENTS WRAPPING 🔥 */
+  /* This ensures the input and buttons always stay in a single row */
+}
+
+.rename-container input {
+  /* ... styles for input ... */
+  flex: 1 1 auto; /* Allows input to take up available space */
+}
+
+.rename-container button {
+  /* ... styles for buttons ... */
+  flex-shrink: 0; /* Ensures buttons never shrink */
 }

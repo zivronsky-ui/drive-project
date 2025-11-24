@@ -20,6 +20,33 @@ router.get("/:user", async function (req, res, next) {
         //     console.log(file);
         //   });
         // });
+
+        router.get("/:user/:fileName/read", (req, res) => {
+          const user = req.params.user;
+          const fileName = req.params.fileName;
+          fs.readdir(
+            path.join(__dirname, `../users/${user}/${fileName}`),
+            "utf8",
+            (err, data) => {
+              if (err) {
+                console.error("Error reading file:", err);
+                return;
+              }
+              res.send(data);
+            }
+          );
+        });
+
+        router.get("/:user/:folderName/readFolder", (req, res) => {
+          fs.readFile("/", "utf8", (err, data) => {
+            if (err) {
+              console.error("Error reading file:", err);
+              return;
+            }
+            res.send(data);
+          });
+        });
+
         arr.push({ filename: file, type: "folder" });
       } else {
         arr.push({ filename: file, type: "file" });
@@ -68,10 +95,15 @@ router.delete("/:user/file/:fileName/delete", (req, res) => {
 });
 
 router.put("/file/rename", (req, res) => {
+  const userName = "ziv";
+  // const fileName = req.params.fileName;
   const { fileName, newFileName } = req.body;
+  console.log("fileName: ", fileName);
+  console.log("newFileName: ", newFileName);
+  // const newFileName = req.body.newFileName;
   const newName = fs.rename(
-    path.join(__dirname, "../users", userName, fileName),
-    path.join(__dirname, "../users", userName, newFileName),
+    path.join(__dirname, "../users", userName, `${fileName}`),
+    path.join(__dirname, "../users", userName, `${newFileName}`),
     (err) => {
       if (err) {
         res.status(500).send({

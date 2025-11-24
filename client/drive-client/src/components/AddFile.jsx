@@ -26,12 +26,21 @@ function AddFile({ url, setData, data }) {
   }
   return (
     <>
-      <input
+      <div className="add-file-container">
+        <input
+          value={fileName}
+          onChange={handleChange}
+          placeholder="Enter file name"
+        />
+        <button onClick={addFile}>Add</button>
+      </div>
+
+      {/* <input
         onChange={handleChange}
         placeholder="enter file name"
         type="text"
       />
-      <button onClick={addFile}>add</button>
+      <button onClick={addFile}>add</button> */}
     </>
   );
 }

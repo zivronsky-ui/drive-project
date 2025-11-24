@@ -2,13 +2,48 @@ import { useState } from "react";
 // import User from "./components/User";
 import "../App.css";
 
-function RenameFile(url) {
+function RenameFile({ filename, data, setData }) {
+  const userName = "ziv";
+  const [showInput, setShowInput] = useState(false);
+  const [value, setValue] = useState("");
   function renameFile() {
-    fetch("http://localhost:3000" + url, { method: "PUT" });
+    console.log(filename);
+    console.log(value);
+    fetch(`http://localhost:3000/myDrive/file/rename`, {
+      method: "PUT",
+      body: JSON.stringify({
+        fileName: filename,
+        newFileName: value,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      if (response.ok) {
+        fetch(`http://localhost:3000/myDrive/${userName}`, { method: "GET" })
+          .then((response) => response.json())
+          .then((data) => {
+            setData(data);
+          });
+        setShowInput(!showInput);
+      } else {
+        alert("something went wrong");
+      }
+    });
+  }
+  function handleChange(e) {
+    setValue(e.target.value);
   }
   return (
     <>
-      <button onClick={renameFile}>rename</button>
+      <button onClick={() => setShowInput(!showInput)}>rename</button>
+      {showInput && (
+        <>
+          {" "}
+          <input onChange={handleChange} value={value} />
+          <button onClick={renameFile}>✅</button>
+        </>
+      )}
     </>
   );
 }

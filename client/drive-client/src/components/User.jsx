@@ -21,12 +21,15 @@ function User() {
 
       {data.map((file) => {
         return file.type === "file" ? (
-          <File
-            filename={file.filename}
-            data={data}
-            setData={setData}
-            username={username}
-          />
+          <Link>
+            {" "}
+            <File
+              filename={file.filename}
+              data={data}
+              setData={setData}
+              username={username}
+            />
+          </Link>
         ) : (
           <Folder foldername={file.filename} data={data} setData={setData} />
         );
